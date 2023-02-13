@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRoutes } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux";
+import { AuthContextProvider } from "context/AuthContext";
+import { routes } from "routes";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const content = useRoutes(routes);
+	return (
+		<HelmetProvider>
+			<Helmet titleTemplate="Appraisal System" defaultTitle="Appraisal System" />
+			<Provider store={store}>
+				<AuthContextProvider>{content}</AuthContextProvider>
+			</Provider>
+		</HelmetProvider>
+	);
 }
 
 export default App;
