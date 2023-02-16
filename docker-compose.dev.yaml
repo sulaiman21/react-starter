@@ -1,0 +1,15 @@
+version: "3"
+services:
+  appraisal_system:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/docker.dev
+    ports:
+      - "3000:3000"
+    container_name: appraisal_system
+    stdin_open: true
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file: .env
